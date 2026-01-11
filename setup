@@ -57,12 +57,12 @@ confirm_and_copy() {
     fi
 }
 
-echo "███████████████████████████████████████" 
-echo "███████Dotfiles Setup Script███████████"
-echo "███████████████████████████████████████"
+echo "███████████████████████████████████" 
+echo "  █████Dotfiles Setup Script█████  "
+echo "███████████████████████████████████"
 echo ""
 
-echo "accessing directory..."
+echo "Acessing directory..."
 sleep 0.5
 
 # Hyprland configs
