@@ -8,6 +8,8 @@ STARSHIP_SRC="$DOTS/starship/starship.toml"
 STARSHIP_DST="$HOME/.config/starship.toml"
 ZSH_SRC="$DOTS/zsh-conf/dots-zshrc"
 ZSH_DST="$HOME/.zshrc"
+BG_SRC="$DOTS/backgrounds"
+BG_DST="$HOME/.config/omarchy/themes/blackturq/backgrounds"
 
 # loading bar animation
 loading_bar() {
@@ -44,10 +46,24 @@ confirm_and_copy() {
         return
     fi
 
-    echo "replace $(basename "$DST") ? (y/n)"
+    if [[ "$AUTO_YES" == "true" ]]; then
+        (
+            mkdir -p "$(dirname "$DST")"
+            cp -f "$SRC" "$DST"
+        ) & loading_bar
+        return
+    fi
+
+    echo "replace $(basename "$DST") ? (y/n/yes)"
     read -r OPT
 
-    if [[ "$OPT" == "y" ]]; then
+    if [[ "$OPT" == "yes" ]]; then
+        AUTO_YES="true"
+        (
+            mkdir -p "$(dirname "$DST")"
+            cp -f "$SRC" "$DST"
+        ) & loading_bar
+    elif [[ "$OPT" == "y" ]]; then
         (
             mkdir -p "$(dirname "$DST")"
             cp -f "$SRC" "$DST"
@@ -76,6 +92,12 @@ confirm_and_copy "$STARSHIP_SRC" "$STARSHIP_DST"
 
 # ZSH
 confirm_and_copy "$ZSH_SRC" "$ZSH_DST"
+
+# Background
+for file in "$BG_SRC"/*; do
+    BASENAME=$(basename "$file")
+    confirm_and_copy "$file" "$BG_DST/$BASENAME"
+done
 
 echo ""
 echo "all tasks finished."

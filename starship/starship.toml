@@ -163,8 +163,8 @@ disabled = false
 
 [character]
 disabled = false
-success_symbol = '[➛](bold fg:green)'
-error_symbol = '[➛](bold fg:red)'
+success_symbol = '[󱞩](bold fg:sky)'
+error_symbol = '[󱞩](bold fg:red)'
 vimcmd_symbol = '[](bold fg:creen)'
 vimcmd_replace_one_symbol = '[](bold fg:purple)'
 vimcmd_replace_symbol = '[](bold fg:purple)'
