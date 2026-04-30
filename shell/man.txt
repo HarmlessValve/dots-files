@@ -1,0 +1,8 @@
+##THIS PATH REQUIERED MANUAL MV###
+
+ghostty/ (directory + shader)
+waybar/ (config + style)
+fastfetch/ (config + image)
+walker-styles/
+screensaver/
+logo.png

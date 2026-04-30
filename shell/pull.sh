@@ -1,22 +1,23 @@
-
 #!/bin/bash
 
 DOTS="$HOME/dots-files"
-HYPR_SRC="$DOTS/hypr"
-HYPR_DST="$HOME/.config/hypr"
-STARSHIP_SRC="$DOTS/starship/starship.toml"
-STARSHIP_DST="$HOME/.config/starship.toml"
-ZSH_SRC="$DOTS/zsh-conf/dots-zshrc"
-ZSH_DST="$HOME/.zshrc"
-BG_SRC="$DOTS/backgrounds"
-BG_DST="$HOME/.config/omarchy/themes/blackturq/backgrounds"
+HYPR_SRC="$HOME/.config/hypr"
+HYPR_DST="$DOTS/hypr"
+STARSHIP_SRC="$HOME/.config/starship.toml"
+STARSHIP_DST="$DOTS/starship/starship.toml"
+ZSH_SRC="$HOME/.zshrc"
+ZSH_DST="$DOTS/zsh-conf/dots-zshrc"
+BG_SRC="$HOME/.config/omarchy/themes/blackturq/backgrounds"
+BG_DST="$DOTS/backgrounds"
 
 # loading bar animation
 loading_bar() {
     local pid=$!
+    local path="$2"
     local width=30
     local progress=0
 
+    printf "%s\n" "$path"
     printf "["
     while kill -0 $pid 2>/dev/null; do
         if (( progress < width )); then
@@ -50,11 +51,11 @@ confirm_and_copy() {
         (
             mkdir -p "$(dirname "$DST")"
             cp -f "$SRC" "$DST"
-        ) & loading_bar
+        ) & loading_bar $! "$DST"
         return
     fi
 
-    echo "replace $(basename "$DST") ? (y/n/yes)"
+    echo "copy $(basename "$SRC") to dots? (y/n/yes)"
     read -r OPT
 
     if [[ "$OPT" == "yes" ]]; then
@@ -62,23 +63,23 @@ confirm_and_copy() {
         (
             mkdir -p "$(dirname "$DST")"
             cp -f "$SRC" "$DST"
-        ) & loading_bar
+        ) & loading_bar $! "$DST"
     elif [[ "$OPT" == "y" ]]; then
         (
             mkdir -p "$(dirname "$DST")"
             cp -f "$SRC" "$DST"
-        ) & loading_bar
+        ) & loading_bar $! "$DST"
     else
         echo "skipped."
     fi
 }
 
-echo "███████████████████████████████████" 
-echo "  █████Dotfiles Setup Script█████  "
+echo "███████████████████████████████████"
+echo "  █████Pull Dotfiles Script█████  "
 echo "███████████████████████████████████"
 echo ""
 
-echo "Acessing directory..."
+echo "Accessing system config..."
 sleep 0.5
 
 # Hyprland configs
@@ -101,103 +102,3 @@ done
 
 echo ""
 echo "all tasks finished."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

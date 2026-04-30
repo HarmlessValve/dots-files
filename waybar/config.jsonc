@@ -4,15 +4,15 @@
   "position": "top",
   "spacing": 4,
   "height": 28,
-  "margin-top": 6,
+  "margin-top": 3,
   "width": 625,
   "modules-left": [
+    "custom/update",
     "clock",
     "mpris"
   ],
   "modules-center": [
     "hyprland/workspaces",
-    "custom/update",
     "custom/screenrecording-indicator"
   ],
   "modules-right": [
@@ -35,7 +35,15 @@
       "6": "6",
       "7": "7",
       "8": "8",
-      "9": "9"
+      "9": "9",
+      "active": ""
+    },
+    "persistent-workspaces":{
+      "1":[],
+      "2":[],
+      "3":[],
+      "4":[],
+      "5":[]
     }
   },
 
@@ -53,13 +61,6 @@
     "tooltip-format": "Omarchy update available",
     "signal": 7,
     "interval": 3600
-  },
-  "custom/weather": {
-    "format": "{}°",
-    "tooltip": true,
-    "interval": 60,
-    "exec": "wttrbar --nerd --location ",  //put your location name here for weather
-    "return-type": "json"
   },
   "cpu": {
     "interval": 2,
@@ -101,7 +102,7 @@
     "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "Connected",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
@@ -132,7 +133,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-        "on-click": "kitty --class=Bluetui -e bluetui"
+        "on-click": "ghostty --class=Bluetui -e bluetui"
   },
 
   "pulseaudio": {
@@ -184,6 +185,31 @@
     "on-click": "omarchy-cmd-screenrecord",
     "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
     "signal": 8,
+    "return-type": "json"
+  },
+  "custom/voxtype": {
+    "exec": "omarchy-voxtype-status",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": {
+      "idle": "",
+      "recording": "󰍬",
+      "transcribing": "󰔟"
+    },
+    "tooltip": true,
+    "on-click-right": "omarchy-voxtype-config",
+    "on-click": "omarchy-voxtype-model"
+  },
+  "custom/idle-indicator": {
+    "on-click": "omarchy-toggle-idle",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/idle.sh",
+    "signal": 9,
+    "return-type": "json"
+  },
+  "custom/notification-silencing-indicator": {
+    "on-click": "omarchy-toggle-notification-silencing",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/notification-silencing.sh",
+    "signal": 10,
     "return-type": "json"
   },
   "tray": {
